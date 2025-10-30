@@ -4,10 +4,11 @@ div.className = "main"
 // div.style.backgroundSize = "cover"
 document.body.appendChild(div)
 
-const table = document.createElement('table')
-const thead = document.createElement('thead')
-const tr = document.createElement('tr')
-const th = document.createElement('th')
+let table = document.createElement('table')
+let thead = document.createElement('thead')
+let tbody = document.createElement('tbody')
+let tr = document.createElement('tr')
+let th = document.createElement('th')
 
 const header = ["Name", "UserName", "Email", "Qualification", "Button"]
 
@@ -108,11 +109,11 @@ formElement.forEach((elem) => {
         form.appendChild(label)
 
         input.className = elem.inputClass
-        if(elem.type === "email") input.setAttribute("required", "true")
+        if(elem.id === "userName") input.setAttribute("required", "true")
         input.setAttribute("type", elem.type)
         input.setAttribute("id", elem.id)
         form.appendChild(input)
-        console.log(input)
+        // console.log(input)
     } else if(elem.type === "radio"){
         let label = document.createElement('label')
         label.innerText = elem.label
@@ -141,10 +142,54 @@ formElement.forEach((elem) => {
     }
 })
 
-const submit = document.createElement('submit')
+const submit = document.createElement('button')
+submit.type = "submit"
 submit.id = "submit"
 submit.textContent = "submit"
 form.appendChild(submit)
+
+let addTableRow = (tableArr) => {
+    let tr = document.createElement('tr')
+    tableArr.forEach(function(colData) {
+        let td = document.createElement('td')
+        // console.log(colData)
+        // console.log(tr)
+        td.innerText = colData
+        console.log(td)
+        tr.appendChild(td)
+        console.log(tr)
+    })
+    tbody.appendChild(tr)
+    table.appendChild(tbody)
+}
+
+form.addEventListener('submit', (e) => {
+    e.preventDefault()
+    console.log("form submitted")
+    let nameField = document.getElementById('name')
+    let userNameField = document.getElementById('userName')
+    let emailField = document.getElementById('email')
+    let qualificationField = document.querySelector('input[name="qualification"]:checked')
+
+    let name = nameField.value
+    let userName = userNameField.value
+    let email = emailField.value
+    let qualification = qualificationField.value
+
+    let tableArr = [name, userName, email, qualification]
+    // console.log(tableArr[0])
+    addTableRow(tableArr)
+    
+    nameField.value = ""
+    userNameField.value = ""
+    emailField.value = ""
+    qualificationField.value = ""
+
+    console.log(name)
+    console.log(userName)
+    console.log(email)
+    console.log(qualification)
+})
 
 
 const style = document.createElement('style')
@@ -159,11 +204,17 @@ style.textContent = `
         overflow: hidden
     }
     table {
-        background-color: #160E0C;
-        width: 60%;
+        // background-color: #160E0C;
+        width: 70%;
         margin-left: auto;
         margin-right: 30px;
         padding: 5px;
+        border: 1px solid black;
+    }
+    
+    th, td {
+        border: 2px solid black;
+        text-align: center; 
     }
     .inputStyle {
         width: 50%;
@@ -188,6 +239,8 @@ style.textContent = `
         border-radius: 5px;
         padding: 4px 10px 4px 10px;
         background-color: #160E0C;
+        color: white;
+        font-size: 16px
     }
     form {
         width: 400px;
