@@ -160,16 +160,19 @@ let addTableRow = (tableDataObject) => {
     deleteBtn.className = "deleteBtn"
     deleteBtn.id = tableDataObject["nameData"]
     console.log(tableDataObject["nameData"])
-    // console.log(deleteBtn)
+    console.log(deleteBtn.id)
     deleteBtn.innerText = "Delete"
     td.appendChild(deleteBtn)
     tr.appendChild(td)
     tbody.appendChild(tr)
     table.appendChild(tbody)
 
-    // deleteBtn.addEventListener("click", () => {
-
-    // })
+    deleteBtn.addEventListener("click", () => {
+        const arrAfterDelete = tableDataArray.filter((eachFormDataObject) => (eachFormDataObject.nameData !== deleteBtn.id))
+        console.log(arrAfterDelete)
+        location.reload()
+        localStorage.setItem("tableDataLocalStorage", JSON.stringify(arrAfterDelete))
+    })
 }
 
 let tableDataArray = []
