@@ -83,10 +83,6 @@ const formElement = [
     }
 ]
 
-// window.addEventListener("load", () => {
-//     const arr = JSON.parse(localStorage.getItem("tableLocalArr"))
-//     formElement(arr)
-// })
 
 formElement.forEach((elem) => {
     if(elem.type !== "radio"){
@@ -136,25 +132,44 @@ submit.id = "submit"
 submit.textContent = "submit"
 form.appendChild(submit)
 
-let addTableRow = (tableArr) => {
-    let tr = document.createElement('tr')
-    tableArr.forEach(function(colData) {
-        let td = document.createElement('td')
-        // console.log(colData)
-        // console.log(tr)
-        td.innerText = colData
-        console.log(td)
-        tr.appendChild(td)
-        console.log(tr)
+
+window.addEventListener("load", () => {
+    const arr = JSON.parse(localStorage.getItem("tableDataLocalStorage"))
+    arr.forEach((item) => {
+        tableDataArray.push(item)
+        addTableRow(item)
     })
+    // console.log(arr)
+})
+
+
+
+let addTableRow = (tableDataObject) => {
+    let tr = document.createElement('tr')
+
+    for (const key in tableDataObject) {
+        // console.log(tableDataObject[key])
+        let td = document.createElement('td')
+        td.innerText = tableDataObject[key]
+        // console.log(td)
+        tr.appendChild(td)
+    }
+
     let td = document.createElement('td')
     let deleteBtn = document.createElement('button')
     deleteBtn.className = "deleteBtn"
+    deleteBtn.id = tableDataObject["nameData"]
+    console.log(tableDataObject["nameData"])
+    // console.log(deleteBtn)
     deleteBtn.innerText = "Delete"
     td.appendChild(deleteBtn)
     tr.appendChild(td)
     tbody.appendChild(tr)
     table.appendChild(tbody)
+
+    // deleteBtn.addEventListener("click", () => {
+
+    // })
 }
 
 let tableDataArray = []
@@ -181,20 +196,20 @@ form.addEventListener('submit', (e) => {
 
     tableDataArray.push(tableDataObject)
     
-    localStorage.setItem("tableDataArray", JSON.stringify(tableDataArray))
-    console.log(localStorage)
-    console.log(tableDataArray[0])
-    addTableRow(tableArr)
+    localStorage.setItem("tableDataLocalStorage", JSON.stringify(tableDataArray))
+    // console.log(localStorage)
+    // console.log(tableDataArray[0])
+    addTableRow(tableDataObject)
     
     nameField.value = ""
     userNameField.value = ""
     emailField.value = ""
     qualificationField.checked = false
 
-    console.log(name)
-    console.log(userName)
-    console.log(email)
-    console.log(qualification)
+    // console.log(name)
+    // console.log(userName)
+    // console.log(email)
+    // console.log(qualification)
 })
 
 
