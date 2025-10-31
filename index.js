@@ -79,26 +79,14 @@ const formElement = [
                 name: "qualification",
             }
         ],
-        // input1: [
-        //     {
-        //         id: "tenth",
-        //         for: "tenth",
-        //         value: "10th",
-        //         type: "radio",
-        //         label: "10th"
-        //     }
-        // ],
-        // input2: [
-        //     {
-        //         id: "twelth",
-        //         for: "twelth",
-        //         value: "12th",
-        //         type: "radio",
-        //         label: "12th"
-        //     }
-        // ]
+        
     }
 ]
+
+// window.addEventListener("load", () => {
+//     const arr = JSON.parse(localStorage.getItem("tableLocalArr"))
+//     formElement(arr)
+// })
 
 formElement.forEach((elem) => {
     if(elem.type !== "radio"){
@@ -159,9 +147,17 @@ let addTableRow = (tableArr) => {
         tr.appendChild(td)
         console.log(tr)
     })
+    let td = document.createElement('td')
+    let deleteBtn = document.createElement('button')
+    deleteBtn.className = "deleteBtn"
+    deleteBtn.innerText = "Delete"
+    td.appendChild(deleteBtn)
+    tr.appendChild(td)
     tbody.appendChild(tr)
     table.appendChild(tbody)
 }
+
+let tableDataArray = []
 
 form.addEventListener('submit', (e) => {
     e.preventDefault()
@@ -176,14 +172,24 @@ form.addEventListener('submit', (e) => {
     let email = emailField.value
     let qualification = qualificationField.value
 
-    let tableArr = [name, userName, email, qualification]
-    // console.log(tableArr[0])
+    let tableDataObject = {
+        nameData: name,
+        userNameData: userName,
+        emailData: email,
+        qualificationData: qualification
+    }
+
+    tableDataArray.push(tableDataObject)
+    
+    localStorage.setItem("tableDataArray", JSON.stringify(tableDataArray))
+    console.log(localStorage)
+    console.log(tableDataArray[0])
     addTableRow(tableArr)
     
     nameField.value = ""
     userNameField.value = ""
     emailField.value = ""
-    qualificationField.value = ""
+    qualificationField.checked = false
 
     console.log(name)
     console.log(userName)
@@ -204,16 +210,17 @@ style.textContent = `
         overflow: hidden
     }
     table {
-        // background-color: #160E0C;
+        background-color: #160E0C;
         width: 70%;
         margin-left: auto;
         margin-right: 30px;
         padding: 5px;
-        border: 1px solid black;
+        border-radius: 10px;
+        // border: 1px solid black;
     }
     
     th, td {
-        border: 2px solid black;
+        // border: 2px solid black;
         text-align: center; 
     }
     .inputStyle {
@@ -242,10 +249,28 @@ style.textContent = `
         color: white;
         font-size: 16px
     }
+    #submit:hover {
+        cursor: pointer;
+    }
+    .deleteBtn {
+        border: 1px solid white;
+        text-align: center;
+        border-radius: 5px;
+        padding: 4px 10px;
+        background-color: transparent;
+        color: white;
+        font-size: 16px;
+        border-color: white;
+
+    }
+    .deleteBtn:hover {
+        cursor: pointer;
+    }
     form {
         width: 400px;
         display: flex;
         flex-direction: column;
+        gap: 5px;
         /* background-color: blue;  */
     }
 
