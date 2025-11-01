@@ -1,0 +1,94 @@
+*{
+margin : 0;
+padding : 0;
+box-sizing : border-box;
+/* font-family : 'Arial'; */
+font-family: Poppins;
+}
+
+html, body{
+height : 100vh;
+width : 100%;
+}
+
+.container {
+    height: 100%;
+    width: 100%;
+    padding: 30px 10px ;
+    /* display: flex;
+    flex-direction: column
+    justify-content: center;
+    align-items: center; */
+}
+
+.text-div {
+    text-align: center;
+    /* background-color: red; */
+    /* margin: auto; */
+    margin: 20px 30px;
+}
+
+.upper-heading {
+    font-weight: 200;
+}
+.lower-heading {
+    font-weight: 500;
+}
+.text-div > p {
+    /* text-align: center; */
+    margin : auto;
+    width: 40%;
+}
+
+.card-container {
+    margin: 20px 30px;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    border: 1px solid black;
+}
+.middle {
+    flex: 1
+}
+.left, .middle-top, .middle-bottom, .right {
+    border: 1px solid rgba(128, 128, 128, 0.3);
+    height: 200px;
+    flex: 1;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    /* padding: 10px 10px; */
+    padding: 5px 10px 5px 10px;
+}
+.left img, .middle-top img, .middle-bottom img, .right img{
+    align-self: flex-end;
+}
+.left {
+    border-top: 2px solid aqua ;  
+}
+.middle-top {
+    border-top: 2px solid red ;  
+    width: 100%;
+}
+.middle-bottom {
+    border-top: 2px solid yellow ;  
+    width: 100%;
+}
+.right {
+    border-top: 2px solid green ;  
+}
+.middle {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    /* background-color: red; */
+}
